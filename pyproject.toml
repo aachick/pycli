@@ -1,0 +1,92 @@
+[tool.black]
+line-length = 88
+target-version = ["py37", "py38"]
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+  | foo.py           # also separately exclude a file named foo.py in
+                     # the root of the project
+)
+'''
+
+[tool.coverage.report]
+exclude_lines = ["pragma: no cover", "def __repr__", "if __name__ == .__main__.:"]
+
+[tool.isort]
+profile = "black"
+src_paths = ["src/pycli"]
+line_length = 88
+lines_after_imports = 2
+lines_between_types = 1
+include_trailing_comma = true
+
+[tool.poetry]
+name = "pycli"
+version = "0.1.0"
+description = "Modern and effective CLI parsing for Python."
+license = "MIT"
+authors = ["Aurélien Chick <aurelien.chick@gmail.com>"]
+maintainers = ["Aurélien Chick <aurelien.chick@gmail.com>"]
+readme = "README.md"
+keywords = ["Python", "CLI"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3 :: Only"
+]
+packages = [
+    { include = "pycli", from = "src" },
+]
+include = ["LICENSE.md"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+docstring-parser = "^0.13"
+typing-utils = "^0.1.0"
+
+[tool.poetry.dev-dependencies]
+autoflake = "^1.4"
+black = "^21.12b0"
+isort = "^5.10.1"
+pre-commit = "^2.16.0"
+pylint = "^2.12.2"
+pytest = "^6.2.5"
+pytest-cov = "^3.0.0"
+mkdocs = "^1.2.3"
+mkdocstrings = "^0.16.2"
+mkdocs-exclude = "^1.0.2"
+mkdocs-material = "^8.1.2"
+tox = "^3.24.5"
+
+[tool.pylint.master]
+fail-under="9.5"
+suggestion-mode="yes"
+
+[tool.pylint.format]
+max-line-length=88
+
+[tool.pytest.ini_options]
+addopts = "--cov=src/pycli --cov-report=term-missing --cov-report=html"
+minversion = "6.0"
+testpaths = ["tests"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

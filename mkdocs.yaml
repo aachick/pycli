@@ -1,0 +1,52 @@
+site_name: pycli
+site_description: Effective and modern CLI parsing for Python.
+
+markdown_extensions:
+    - toc:
+        permalink: "#"
+    - attr_list
+    - pymdownx.tabbed
+    - pymdownx.snippets
+    - pymdownx.highlight
+    - pymdownx.superfences
+    - pymdownx.inlinehilite
+
+nav:
+  - Home: 'index.md'
+  - API: 'api.md'
+
+plugins:
+  - exclude:
+      glob:
+        - build.py
+        - requirements.txt
+  - search:
+      lang: en
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          rendering:
+            show_source: true
+            show_root_heading: true
+          selection:
+            docstring_style: numpy
+          setup_commands:
+              - import sys
+              - sys.path.append("./src")
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: cyan
+      accent: light blue
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      primary: cyan
+      accent: light blue
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
